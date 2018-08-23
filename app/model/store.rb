@@ -1,6 +1,7 @@
 class Store < ActiveRecord::Base
   has_many :orders
   has_many :customers, through: :orders
+  has_many :ingredients, through: :orders
 
   def self.update_sales
     self.all.each do |each_store|
@@ -46,6 +47,67 @@ class Store < ActiveRecord::Base
       puts "#{name} has been bulldozed!"
     end
   end
+
+  def total_cost_of_goods_purchased
+    total = self.calculate_total_cost
+    puts "Total Cost of Ingredients: $#{total}"
+  end
+
+  def calculate_total_cost
+    total = 0
+    self.ingredients.each do |each_ingredient|
+      total += each_ingredient[:cost]
+    end
+    total
+  end
+
+  def self.calculate_company_food_costs
+    total = 0
+      self.all.each do |each_store|
+        store_total = each_store.calculate_total_cost
+        total += store_total
+      end
+      total
+  end
+
+  def display_ingredients_cost
+    a = calculate_store_food
+    a.each do |name, cost|
+      puts "#{name}: $#{cost}"
+    end
+  end
+
+  def calculate_store_food
+    a = {}
+    self.ingredients.each do |each_ingredient|
+      if a[each_ingredient.name] == nil
+        a[each_ingredient.name] = each_ingredient.cost
+      else
+        a[each_ingredient.name] += each_ingredient.cost
+      end
+    end
+    a
+  end
+
+  def calculate_food_cost
+    inv_cost = self.calculate_total_cost
+    store_sales = self.sales
+    food_cost = (inv_cost.to_f / sales.to_f) * 100
+    food_cost = food_cost.to_i
+  end
+
+  def display_food_cost
+    food_cost = self.calculate_food_cost
+    puts "Food Cost: #{food_cost}%"
+  end
+
+  def self.display_stores
+    self.all.each do |each_store|
+      puts "Name: #{each_store.name}, Location: #{each_store.location}, Sales: #{each_store.sales}, CustomerCount: #{each_store.customer_count}"
+    end
+    return nil
+  end
+
 
 
 end #end of class

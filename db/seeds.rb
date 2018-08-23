@@ -73,3 +73,9 @@ Ingredient.create(name: "Croutons", cost: rand(1..100), calories: rand(1..200))
 Ingredient.create(name: "Lentils", cost: rand(1..100), calories: rand(1..200))
 Ingredient.create(name: "Asparagus", cost: rand(1..100), calories: rand(1..200))
 puts "Done making ingredients"
+
+puts "Making salad_ingredients"
+50.times do
+SaladIngredients.create(salad_id: Salad.all.sample.id, ingredient_id: Ingredient.all.sample.id).reload
+end
+puts "Done Making Salad Ingredients"

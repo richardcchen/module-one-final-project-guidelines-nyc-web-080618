@@ -17,19 +17,22 @@ class RunIt
   def customer_display
     puts "1. Search for specific customer"
     puts "2. Delete customer"
-    puts "3. Go back to main screen"
+    puts "3. Display all customer information"
+    puts "4. Go back to main screen"
   end
 
   def order_display
     puts "1. Search for specific order"
     puts "2. Delete order"
+    puts "3. Display all order data"
     puts "3. Go back to main screen"
   end
 
   def store_display
     puts "1. Search for specific store"
     puts "2. Bulldoze store"
-    puts "3. Go back to main screen"
+    puts "3. Display all Store data"
+    puts "4. Go back to main screen"
   end
 
   def company_display
@@ -63,6 +66,11 @@ class RunIt
       puts "Please enter name to delete"
       name = gets.chomp
       Customer.delete_customer(name)
+    elsif cust_input == 3
+      Customer.display_customers
+      puts
+      puts
+      puts
     else 5.times do puts " " end
     end
   end
@@ -85,6 +93,9 @@ class RunIt
       order_id = gets.chomp
       order_id.to_i
       Order.delete_order(order_id)
+    elsif cust_input == 3
+      Order.display_orders
+      puts
     else 5.times do puts " " end
     end
   end
@@ -99,14 +110,27 @@ class RunIt
         puts "Location: #{store_info.location}"
         puts "Total Sales: #{store_info.sales}"
         puts "Customer Count: #{store_info.customer_count}"
+        store_info.display_food_cost
+        puts
+        puts
+        puts "Inventory Sheet"
+        puts
+        store_info.display_ingredients_cost
+        store_info.total_cost_of_goods_purchased
       end
       5.times do
-        puts " "
+        puts
       end
     elsif cust_input == 2
       puts "Please enter store name to delete"
       name = gets.chomp
       Store.delete_store(name)
+      puts
+      puts
+    elsif cust_input == 3
+      Store.display_stores
+      puts
+      puts 
     else 5.times do puts " " end
     end
   end
@@ -115,8 +139,14 @@ class RunIt
       puts "Total Amount of Customers: #{Customer.all.count}"
       puts "Total Amount of Orders: #{Order.all.count}"
       puts "Total Amount of Stores: #{Store.all.count}"
-      total = Store.total_company_sales
-      puts "Total Company Sales: #{total}"
+      total_sales = Store.total_company_sales
+      puts "Total Company Sales: $#{total_sales}"
+      total_food_cost = Store.calculate_company_food_costs
+      puts "Total Company Food Costs: $#{total_food_cost}"
+      food_percentage = (total_food_cost.to_f) / (total_sales.to_f) * 100
+      food_percentage = food_percentage.to_i
+      puts "Food Cost Percentage: #{food_percentage}%"
+
       5.times do puts " " end
   end
 
