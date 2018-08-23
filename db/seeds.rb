@@ -49,3 +49,27 @@ puts "Making Order_Salads"
     OrderSalad.create(order_id: Order.all.sample.id, salad_id: Salad.all.sample.id)
   end
 puts "Done Making Orders_Salads"
+
+puts "Making Ingredients"
+Ingredient.create(name: "Romaine", cost: rand(1..50), calories: rand(1..200))
+Ingredient.create(name: "Mesclun", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Spinach", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Arugula", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Tomato", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Onion", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Cilantro", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Basil", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Chicken", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Fish", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Corn", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Sweet Potatoes", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Broccoli", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Avocado", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Cheese", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Egg", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Chickenpea", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Kale", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Croutons", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Lentils", cost: rand(1..100), calories: rand(1..200))
+Ingredient.create(name: "Asparagus", cost: rand(1..100), calories: rand(1..200))
+puts "Done making ingredients"
