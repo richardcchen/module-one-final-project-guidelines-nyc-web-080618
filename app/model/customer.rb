@@ -31,6 +31,7 @@ class Customer < ActiveRecord::Base
 
   def self.delete_customer(name)
     if self.get_customer_info(name) == nil
+      puts "Name not found".colorize(:red).bold 
       return nil
     else
       self.get_customer_info(name).destroy

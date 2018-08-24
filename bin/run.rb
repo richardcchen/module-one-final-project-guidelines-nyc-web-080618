@@ -41,8 +41,3 @@ while input != 7 do
     UserInterface.activate
   end #end of main screen options
 end
-
-#101
-#Giant Bird the Hunter
-#"Growlithe"
-binding.pry
