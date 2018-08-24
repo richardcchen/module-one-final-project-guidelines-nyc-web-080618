@@ -108,6 +108,14 @@ class Store < ActiveRecord::Base
     return nil
   end
 
+  def self.store_array
+    a = []
+    self.all.each do |each_store|
+      a << each_store
+    end
+    a
+  end
+
 
 
 end #end of class

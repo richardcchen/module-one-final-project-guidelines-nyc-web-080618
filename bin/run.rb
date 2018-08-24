@@ -4,7 +4,7 @@ run = RunIt.new
 run.up_to_date
 run.welcome
 input = 0
-while input != 6 do
+while input != 7 do
   run.main_screen_display
   input = gets.chomp
   input = input.to_i
@@ -32,6 +32,8 @@ while input != 6 do
   elsif input == 5
     run.up_to_date
     puts "All information is up to date!"
+  elsif input == 6
+    UserInterface.activate
   end #end of main screen options
 end
 

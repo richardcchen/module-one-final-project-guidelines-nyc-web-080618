@@ -6,6 +6,23 @@ class Order < ActiveRecord::Base
   has_many :salads, through: :order_salads
   has_many :ingredients, through: :salads
 
+  def update_total_price
+    total = 0
+    self.salads.each do |each_salad|
+      total += each_salad.price
+    end
+    total
+  end
+
+  def self.update_all_order_prices
+    Order.all.each do |each_order|
+      order_price = each_order.update_total_price
+      Order.update(each_order.id, total: order_price)
+      #Customer.update(customer_instance.id, num_of_visits: total)
+    end
+  end
+
+
   def self.get_order_info(order_id)
     order_object = self.find_by({id: order_id})
     if order_object == nil
@@ -29,6 +46,15 @@ class Order < ActiveRecord::Base
       #binding.pry
       puts "ID: #{each_order.id}, Total: #{each_order.total}, CustomerName: #{each_order.customer.name}, StoreName: #{each_order.store.name}"
     end
+  end
+
+  def display_order_summary
+    self.update_total_price
+    puts "Here is a summary of your order:"
+    self.salads.each do |each_salad|
+      puts "#{each_salad.name}: #{each_salad.price}"
+    end
+    puts "Total Order: #{self.total}"
   end
 
 end

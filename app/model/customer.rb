@@ -45,4 +45,7 @@ class Customer < ActiveRecord::Base
     return nil
   end
 
+  def add_order(order)
+    
+  end
 end #end of class

@@ -11,7 +11,8 @@ class RunIt
     puts "3. View/Edit store info"
     puts "4. View company information"
     puts "5. Update to recent information"
-    puts "6. Exit"
+    puts "6. Press if you are a customer"
+    puts "7. Exit"
   end
 
   def customer_display
@@ -47,6 +48,7 @@ class RunIt
     Customer.update_number_of_visits
     Store.update_sales
     Store.update_customer_count
+    Order.update_all_order_prices
   end
 
   def self.customer_options(cust_input)
@@ -130,7 +132,7 @@ class RunIt
     elsif cust_input == 3
       Store.display_stores
       puts
-      puts 
+      puts
     else 5.times do puts " " end
     end
   end

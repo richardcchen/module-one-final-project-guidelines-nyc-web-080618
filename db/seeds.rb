@@ -27,7 +27,7 @@ puts "Done Making Stores"
 
 puts "Making Orders"
   100.times do
-    Order.create(customer_id: Customer.all.sample.id, store_id: Store.all.sample.id, total: rand(1..100))
+    Order.create(customer_id: Customer.all.sample.id, store_id: Store.all.sample.id)
   end
 puts "Done Making Orders"
 
