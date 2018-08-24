@@ -103,7 +103,7 @@ class Store < ActiveRecord::Base
 
   def self.display_stores
     self.all.each do |each_store|
-      puts "Name: #{each_store.name}, Location: #{each_store.location}, Sales: #{each_store.sales}, CustomerCount: #{each_store.customer_count}"
+      puts "Name: #{each_store.name}, Location: #{each_store.location}, Sales: $#{each_store.sales}, CustomerCount: #{each_store.customer_count}"
     end
     return nil
   end

@@ -18,7 +18,6 @@ class Order < ActiveRecord::Base
     Order.all.each do |each_order|
       order_price = each_order.update_total_price
       Order.update(each_order.id, total: order_price)
-      #Customer.update(customer_instance.id, num_of_visits: total)
     end
   end
 
@@ -44,13 +43,14 @@ class Order < ActiveRecord::Base
   def self.display_orders
     self.all.map do |each_order|
       #binding.pry
-      puts "ID: #{each_order.id}, Total: #{each_order.total}, CustomerName: #{each_order.customer.name}, StoreName: #{each_order.store.name}"
+      puts "ID: #{each_order.id}, Total: $#{each_order.total}, CustomerName: #{each_order.customer.name}, StoreName: #{each_order.store.name}"
     end
   end
 
   def display_order_summary
     self.update_total_price
     puts "Here is a summary of your order:"
+    self.reload
     self.salads.each do |each_salad|
       puts "#{each_salad.name}: #{each_salad.price}"
     end

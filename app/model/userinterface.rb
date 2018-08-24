@@ -24,7 +24,6 @@ class UserInterface
     user_input2 = 1
     while user_input2 == 1 do
       self.menu
-      puts ""
       puts "Please choose an option!"
 
       user_input = gets.chomp
@@ -40,24 +39,47 @@ class UserInterface
       puts "Press 1 for yes, 2 for no"
       user_input2 = gets.chomp.to_i
     end
-    new_order.display_order_summary
+    Order.update_all_order_prices
+    Customer.update_total_spend
+    Customer.update_number_of_visits
     new_order
   end
 
   def self.choose_store
-    user_input = 99999999
-    puts "Please choose a store"
     a = Store.store_array
     a.each_with_index do |each_store, index|
       puts "#{index + 1}. #{each_store.name}, #{each_store.location}"
     end
-    while user_input > a.length do
+    begin
+      puts "Please choose a store"
       user_input = gets.chomp.to_i
-    end
+    end while user_input > a.length
     user_input -= 1
+    puts
+    puts
+    puts
+    puts
     a[user_input]
   end
 
+  def self.add_customer_to_order
+    begin
+      begin
+        puts "Please choose an option"
+        puts "1. New Customer"
+        puts "2. Existing Customer"
+        user_input = gets.chomp.to_i
+      end while user_input > 2
+        puts "Please enter your name"
+        user_name = gets.chomp
+        if user_input == 1
+          customer = Customer.create(name: user_name)
+        elsif user_input == 2
+          customer = Customer.get_customer_info(user_name)
+        end
+      end while customer == nil
+      customer
+  end
 
   def self.activate
     self.welcome
@@ -67,8 +89,34 @@ class UserInterface
       store_instance = self.choose_store
       order = self.create_order
       order.update(store_id: store_instance.id)
+      customer_instance = self.add_customer_to_order
+      order.update(customer_id: customer_instance.id)
+      Order.update_all_order_prices
+      Customer.update_total_spend
+      Customer.update_number_of_visits
+      order.display_order_summary
+      puts "Thank you #{customer_instance.name}!"
+      puts
+      puts
+      puts
+      puts
     elsif user_input == 2
-
+      puts "Please enter your name"
+      user_name = gets.chomp
+      customer = Customer.get_customer_info(user_name)
+      if customer == nil
+        puts "Sorry, that name was not found"
+      else
+        customer.orders.each do |each_order|
+          puts "Order ID: #{each_order.id}"
+          each_order.salads.each do |each_salad|
+            puts "      #{each_salad.name}, $#{each_salad.price}"
+          end
+          puts "Order Total: #{each_order.total}"
+          puts
+          puts
+        end
+      end
     end
   end
 

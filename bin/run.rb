@@ -1,4 +1,6 @@
 require_relative '../config/environment'
+require 'colorize'
+require 'colorized_string'
 
 run = RunIt.new
 run.up_to_date
@@ -6,8 +8,10 @@ run.welcome
 input = 0
 while input != 7 do
   run.main_screen_display
-  input = gets.chomp
-  input = input.to_i
+  input = gets.chomp.to_i
+  puts
+  puts
+  puts
   5.times do
     puts " "
   end

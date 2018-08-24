@@ -40,12 +40,12 @@ class Customer < ActiveRecord::Base
 
   def self.display_customers
     self.all.each do |each_customer|
-      puts "Name: #{each_customer.name}, TotalSpend: #{each_customer.total_spend}, #ofVisits:#{each_customer.num_of_visits}"
+      puts "Name: #{each_customer.name}, TotalSpend: $#{each_customer.total_spend}, #ofVisits:#{each_customer.num_of_visits}"
     end
     return nil
   end
 
   def add_order(order)
-    
+
   end
 end #end of class
