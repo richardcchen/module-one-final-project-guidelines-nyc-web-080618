@@ -34,13 +34,13 @@ class Customer < ActiveRecord::Base
       return nil
     else
       self.get_customer_info(name).destroy
-      puts "#{name} has been removed"
+      puts "#{name} has been removed".colorize(:red).bold
     end
   end
 
   def self.display_customers
     self.all.each do |each_customer|
-      puts "Name: #{each_customer.name}, TotalSpend: $#{each_customer.total_spend}, #ofVisits:#{each_customer.num_of_visits}"
+      puts "Name: #{each_customer.name}         ".colorize(:green) + "TotalSpend: $#{each_customer.total_spend}     ".colorize(:yellow) + "#ofVisits: #{each_customer.num_of_visits}".bold
     end
     return nil
   end

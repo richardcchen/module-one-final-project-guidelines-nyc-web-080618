@@ -36,14 +36,14 @@ class Order < ActiveRecord::Base
       return nil
     else
       self.get_order_info(order_id).destroy
-      puts "#{order_id} has been removed"
+      puts "#{order_id} has been removed".colorize(:red).bold
     end
   end
 
   def self.display_orders
     self.all.map do |each_order|
       #binding.pry
-      puts "ID: #{each_order.id}, Total: $#{each_order.total}, CustomerName: #{each_order.customer.name}, StoreName: #{each_order.store.name}"
+      puts "ID: #{each_order.id}         ".colorize(:green) + " Total: $#{each_order.total}       ".colorize(:yellow) + " CustomerName: #{each_order.customer.name}                   ".colorize(:blue) + " StoreName: #{each_order.store.name}".colorize(:brown)
     end
   end
 
@@ -52,9 +52,9 @@ class Order < ActiveRecord::Base
     puts "Here is a summary of your order:"
     self.reload
     self.salads.each do |each_salad|
-      puts "#{each_salad.name}: #{each_salad.price}"
+      puts "#{each_salad.name}: #{each_salad.price}".colorize(:yellow)
     end
-    puts "Total Order: #{self.total}"
+    puts "Total Order: #{self.total}".colorize(:green).bold
   end
 
 end

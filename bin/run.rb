@@ -1,6 +1,7 @@
 require_relative '../config/environment'
 require 'colorize'
 require 'colorized_string'
+require 'artii'
 
 run = RunIt.new
 run.up_to_date

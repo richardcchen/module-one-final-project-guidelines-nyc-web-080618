@@ -6,16 +6,20 @@ class RunIt
 
 
   def main_screen_display
+    puts Artii::Base.new.asciify "Main"
+    puts Artii::Base.new.asciify "Menu"
     puts "1. View/Edit customer info"
     puts "2. View/Edit order info"
     puts "3. View/Edit store info"
     puts "4. View company information"
     puts "5. Update to recent information"
-    puts "6. Press if you are a customer".colorize(:blue).bold
+    puts "6. Press if you are a customer".colorize(:green).bold
     puts "7. Exit".colorize(:red)
   end
 
   def customer_display
+    puts Artii::Base.new.asciify "Customer"
+    puts Artii::Base.new.asciify "Options"
     puts "1. Search for specific customer"
     puts "2. Delete customer"
     puts "3. Display all customer information"
@@ -23,13 +27,17 @@ class RunIt
   end
 
   def order_display
+    puts Artii::Base.new.asciify "Order"
+    puts Artii::Base.new.asciify "Options"
     puts "1. Search for specific order"
     puts "2. Delete order"
     puts "3. Display all order data"
-    puts "3. Go back to main screen".colorize(:red)
+    puts "4. Go back to main screen".colorize(:red)
   end
 
   def store_display
+    puts Artii::Base.new.asciify "Store"
+    puts Artii::Base.new.asciify "Options"
     puts "1. Search for specific store"
     puts "2. Bulldoze store"
     puts "3. Display all Store data"
@@ -37,6 +45,8 @@ class RunIt
   end
 
   def company_display
+    puts Artii::Base.new.asciify "Company"
+    puts Artii::Base.new.asciify "Options"
     puts "1. List all the customers"
     puts "2. List all the orders"
     puts "3. List all the stores"
@@ -64,12 +74,14 @@ class RunIt
         customer_info.orders.each do |each_order|
           puts "Order ID: #{each_order.id}"
           each_order.salads.each do |each_salad|
-            puts "      #{each_salad.name}, $#{each_salad.price}"
+            puts "      #{each_salad.name}, $#{each_salad.price}".colorize(:yellow).bold
           end
           puts "Order Total: $#{each_order.total}".colorize(:green)
           puts
           puts
         end
+        puts "Press and enter any key to return to main menu".colorize(:red).bold
+        gets
       end
       5.times do
         puts " "
@@ -78,11 +90,15 @@ class RunIt
       puts "Please enter name to delete".colorize(:red)
       name = gets.chomp
       Customer.delete_customer(name)
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
     elsif cust_input == 3
       Customer.display_customers
       puts
       puts
       puts
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
     else 5.times do puts " " end
     end
   end
@@ -95,11 +111,13 @@ class RunIt
       if order_info != nil
           puts "Order ID: #{order_info.id}"
           order_info.salads.each do |each_salad|
-            puts "      #{each_salad.name}, $#{each_salad.price}"
+            puts "      #{each_salad.name}, $#{each_salad.price}".colorize(:yellow)
           end
           puts "Order Total: $#{order_info.total}".colorize(:green)
           puts
           puts
+          puts "Press and enter any key to return to main menu".colorize(:red).bold
+          gets
       end
       5.times do
         puts " "
@@ -109,9 +127,13 @@ class RunIt
       order_id = gets.chomp
       order_id.to_i
       Order.delete_order(order_id)
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
     elsif cust_input == 3
       Order.display_orders
       puts
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
     else 5.times do puts " " end
     end
   end
@@ -122,17 +144,21 @@ class RunIt
       name = gets.chomp
       store_info = Store.get_store_info(name)
       if store_info != nil
-        puts "Store name: #{store_info.name}".bold
-        puts "Location: #{store_info.location}".bold
-        puts "Total Sales: $#{store_info.sales}".bold
-        puts "Customer Count: #{store_info.customer_count}".bold
+        puts "Store name: #{store_info.name}".colorize(:green).bold
+        puts "Location: #{store_info.location}".colorize(:green).bold
+        puts "Total Sales: $#{store_info.sales}".colorize(:green).bold
+        puts "Customer Count: #{store_info.customer_count}".colorize(:green).bold
         store_info.display_food_cost
         puts
         puts
-        puts "Inventory Sheet".underline
+        puts "Inventory Sheet".colorize(:green).underline
         puts
         store_info.display_ingredients_cost
         store_info.total_cost_of_goods_purchased
+        puts
+        puts
+        puts "Press and enter any key to return to main menu".colorize(:red).bold
+        gets
       end
       5.times do
         puts
@@ -143,15 +169,21 @@ class RunIt
       Store.delete_store(name)
       puts
       puts
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
     elsif cust_input == 3
       Store.display_stores
       puts
       puts
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
     else 5.times do puts " " end
     end
   end
 
   def self.company_options(input)
+      puts Artii::Base.new.asciify "Company"
+      puts Artii::Base.new.asciify "Overview"
       puts "Total Amount of Customers: #{Customer.all.count}".colorize(:green).bold
       puts "Total Amount of Orders: #{Order.all.count}".colorize(:green).bold
       puts "Total Amount of Stores: #{Store.all.count}".colorize(:green).bold
@@ -164,6 +196,8 @@ class RunIt
       puts "COGS: #{food_percentage}%".colorize(:green).bold
 
       5.times do puts " " end
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
   end
 
 

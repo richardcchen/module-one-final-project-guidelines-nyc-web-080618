@@ -1,7 +1,10 @@
 class UserInterface
 
   def self.welcome
-    puts "Welcome to TastyGreen's! How may I assist you"
+    puts Artii::Base.new.asciify "Welcome"
+    puts Artii::Base.new.asciify "  to"
+    puts Artii::Base.new.asciify "TastyGreens"
+    puts "How may I assist you".colorize(:green).bold
   end
 
   def self.user_options
@@ -14,7 +17,7 @@ class UserInterface
     Salad.all.each do |each_salad|
       counter += 1
       calories = each_salad.calculate_calories
-     puts  "#{counter}. #{each_salad.name}, $#{each_salad.price}, #{calories} calories"
+     puts  "#{counter}. #{each_salad.name}, $#{each_salad.price}, #{calories} calories".colorize(:yellow)
     end
   end
 
@@ -48,10 +51,10 @@ class UserInterface
   def self.choose_store
     a = Store.store_array
     a.each_with_index do |each_store, index|
-      puts "#{index + 1}. #{each_store.name}, #{each_store.location}"
+      puts "#{index + 1}. #{each_store.name}, #{each_store.location}".colorize(:green).bold
     end
     begin
-      puts "Please choose a store"
+      puts "Please choose a store".colorize(:green).bold
       user_input = gets.chomp.to_i
     end while user_input > a.length
     user_input -= 1
@@ -65,12 +68,12 @@ class UserInterface
   def self.add_customer_to_order
     begin
       begin
-        puts "Please choose an option"
-        puts "1. New Customer"
-        puts "2. Existing Customer"
+        puts "Please choose an option".colorize(:green).bold
+        puts "1. New Customer".colorize(:green).bold
+        puts "2. Existing Customer".colorize(:green).bold
         user_input = gets.chomp.to_i
       end while user_input > 2
-        puts "Please enter your name"
+        puts "Please enter your name".colorize(:green).bold
         user_name = gets.chomp
         if user_input == 1
           customer = Customer.create(name: user_name)
@@ -95,26 +98,30 @@ class UserInterface
       Customer.update_total_spend
       Customer.update_number_of_visits
       order.display_order_summary
-      puts "Thank you #{customer_instance.name}!"
+      puts "Thank you #{customer_instance.name}!".colorize(:green).bold
+      puts "Press and enter any key to return to main menu".colorize(:red).bold
+      gets
       puts
       puts
       puts
       puts
     elsif user_input == 2
-      puts "Please enter your name"
+      puts "Please enter your name".colorize(:green).bold
       user_name = gets.chomp
       customer = Customer.get_customer_info(user_name)
       if customer == nil
-        puts "Sorry, that name was not found"
+        puts "Sorry, that name was not found".colorize(:red).bold
       else
         customer.orders.each do |each_order|
-          puts "Order ID: #{each_order.id}"
+          puts "Order ID: #{each_order.id}".colorize(:green).bold
           each_order.salads.each do |each_salad|
-            puts "      #{each_salad.name}, $#{each_salad.price}"
+            puts "      #{each_salad.name}, $#{each_salad.price}".colorize(:yellow)
           end
-          puts "Order Total: #{each_order.total}"
+          puts "Order Total: #{each_order.total}".colorize(:green).bold
           puts
           puts
+          puts "Press and enter any key to return to main menu".colorize(:red).bold
+          gets
         end
       end
     end

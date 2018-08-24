@@ -44,13 +44,13 @@ class Store < ActiveRecord::Base
       return nil
     else
       self.get_store_info(name).destroy
-      puts "#{name} has been bulldozed!"
+      puts "#{name} has been bulldozed!".colorize(:red).bold
     end
   end
 
   def total_cost_of_goods_purchased
     total = self.calculate_total_cost
-    puts "Total Cost of Ingredients: $#{total}"
+    puts "Total Cost of Ingredients: $#{total}".colorize(:green).bold
   end
 
   def calculate_total_cost
@@ -98,12 +98,12 @@ class Store < ActiveRecord::Base
 
   def display_food_cost
     food_cost = self.calculate_food_cost
-    puts "Food Cost: #{food_cost}%"
+    puts "Food Cost: #{food_cost}%".colorize(:green).bold
   end
 
   def self.display_stores
     self.all.each do |each_store|
-      puts "Name: #{each_store.name}, Location: #{each_store.location}, Sales: $#{each_store.sales}, CustomerCount: #{each_store.customer_count}"
+      puts "Name: #{each_store.name}       ".colorize(:green) + " Location: #{each_store.location}      ".colorize(:yellow) + " Sales: $#{each_store.sales}      ".colorize(:blue) + "CustomerCount: #{each_store.customer_count}".bold
     end
     return nil
   end

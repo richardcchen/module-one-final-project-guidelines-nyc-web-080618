@@ -6,5 +6,6 @@ require_all 'lib'
 require_all 'app'
 require 'colorize'
 require 'colorized_string'
+require 'artii'
 
 ActiveRecord::Base.logger = nil
