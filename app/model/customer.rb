@@ -31,7 +31,7 @@ class Customer < ActiveRecord::Base
 
   def self.delete_customer(name)
     if self.get_customer_info(name) == nil
-      puts "Name not found".colorize(:red).bold 
+      puts "Name not found".colorize(:red).bold
       return nil
     else
       self.get_customer_info(name).destroy
@@ -41,7 +41,7 @@ class Customer < ActiveRecord::Base
 
   def self.display_customers
     self.all.each do |each_customer|
-      puts "Name: #{each_customer.name}         ".colorize(:green) + "TotalSpend: $#{each_customer.total_spend}     ".colorize(:yellow) + "#ofVisits: #{each_customer.num_of_visits}".bold
+      puts "Name: #{each_customer.name}                            ".colorize(:green) + "TotalSpend: $#{each_customer.total_spend}                              ".colorize(:yellow) + "#ofVisits: #{each_customer.num_of_visits}".bold
     end
     return nil
   end

@@ -41,10 +41,12 @@ class Order < ActiveRecord::Base
   end
 
   def self.display_orders
-    self.all.map do |each_order|
-      if each_order.customer_id != nil && each_order.store_id != nil
+    self.all.each do |each_order|
+      if each_order.customer != nil
+        if  each_order.store != nil
       #binding.pry
         puts "ID: #{each_order.id}         ".colorize(:green) + " Total: $#{each_order.total}       ".colorize(:yellow) + " CustomerName: #{each_order.customer.name}                   ".colorize(:blue) + " StoreName: #{each_order.store.name}".colorize(:brown)
+        end
       end
     end
   end
